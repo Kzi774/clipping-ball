@@ -1,12 +1,9 @@
-import { ClipCanvas } from "./ClipCanvas";
 import * as THREE from "three";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, Stats } from "@react-three/drei";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import {
   SUBTRACTION,
-  INTERSECTION,
-  ADDITION,
   Brush,
   Evaluator,
 } from "three-bvh-csg";
