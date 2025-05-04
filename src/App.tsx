@@ -10,10 +10,10 @@ import {
 import "./App.css";
 
 function CSGScene() {
-  const baseBrushRef = useRef();
-  const brushRef = useRef();
-  const brushZRef = useRef();
-  const wireframeRef = useRef();
+  const baseBrushRef = useRef<Brush>(null);
+  const brushRef = useRef<Brush>(null);
+  const brushZRef = useRef<Brush>(null);
+  const wireframeRef = useRef<THREE.Mesh>(null);
   const [params] = useState({
     operation: SUBTRACTION,
     useGroups: true,
@@ -47,7 +47,7 @@ function CSGScene() {
   );
 
   const evaluatorRef = useRef(new Evaluator());
-  const [result, setResult] = useState();
+  const [result, setResult] = useState<Brush>();
 
   const { scene } = useThree();
 
@@ -66,8 +66,10 @@ function CSGScene() {
     brush.position.x = swing;
     brush.updateMatrixWorld();
 
-    brushZ.position.z = Math.sin(t + Math.PI / 2) * 3;
-    brushZ.updateMatrixWorld();
+    if (brushZ) {
+      brushZ.position.z = Math.sin(t + Math.PI / 2) * 3;
+      brushZ.updateMatrixWorld();
+    }
 
     if (result) {
       scene.remove(result);
